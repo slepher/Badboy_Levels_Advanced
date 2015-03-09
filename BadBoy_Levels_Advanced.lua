@@ -260,7 +260,6 @@ end)
 ChatFrame_AddMessageEventFilter(
    "CHAT_MSG_DND",
    function(_, _, msg, player)
-      print("dnd " .. msg)
       if good[player] then return end
       if filterTable[player] then return true end
 end)

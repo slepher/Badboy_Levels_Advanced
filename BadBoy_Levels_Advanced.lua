@@ -90,6 +90,7 @@ local checkLevel =
 -- rewrite logic of add friend
 -- chat_msg_system filter will act both on badboy add friend and user add friend
 -- so we should check if maybe msg is pending
+
 -- should be local, global for debug
 pendingRequests = 0
 local badboyAddFriend, hookBadboyAddFriend
@@ -253,15 +254,17 @@ end)
 ChatFrame_AddMessageEventFilter(
    "CHAT_MSG_AFK",
    function(_, _, msg, player)
-      if good[player] then return end
-      if filterTable[player] then return true end
+      local trimmedPlayer = Ambiguate(player, "none")
+      if good[trimmedPlayer] then return end
+      if filterTable[trimmedPlayer] then return true end
 end)
 
 ChatFrame_AddMessageEventFilter(
    "CHAT_MSG_DND",
    function(_, _, msg, player)
-      if good[player] then return end
-      if filterTable[player] then return true end
+      local trimmedPlayer = Ambiguate(player, "none")
+      if good[trimmedPlayer] then return end
+      if filterTable[trimmedPlayer] then return true end
 end)
 
 --outgoing whisper filtering function
